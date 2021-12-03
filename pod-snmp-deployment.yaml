@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pod-snmp-deployment
+  labels:
+    app: pod-snmp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pod-snmp
+  template:
+    metadata:
+      labels:
+        app: pod-snmp
+    spec:
+      containers:
+      # imagePullSecrets:
+      #   - name: myregistry.local-key
+      - name: pod-snmp 
+        image: quay.io/wcaban/pod-snmp:latest
+        imagePullPolicy: Always
+        # command: ["/bin/bash", "-c", "sleep infinity"]
+        # snmptrapd -Dusm -n -d -f -Lo -c /snmp/snmptrapd.conf
+        command:
+          - /snmp/entrypoint.sh
+        ports:
+          - containerPort: 9000
+            protocol: UDP
