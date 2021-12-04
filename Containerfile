@@ -6,7 +6,7 @@ FROM registry.access.redhat.com/ubi8/ubi
 # building the container on a RHEL node with valid subscriptions
 # other: net-snmp-devel
 RUN dnf install --setopt=tsflags=nodocs -y \
-    iproute bind-utils iputils procps-ng \
+    iproute bind-utils iputils procps-ng iperf3 \
     net-snmp net-snmp-utils && \
     dnf -y update && \
     dnf clean all && \

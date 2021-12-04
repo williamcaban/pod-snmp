@@ -2,7 +2,8 @@
 
 echo "Starting SNMP Trap service"
 
-if [[ -z ${DEBUG+x} ]]; then
+if [[ ! -z ${DEBUG+x} ]]; then
+    # If DEBUG is set
     echo "Files in snmp folder"
     ls -R /snmp
 fi

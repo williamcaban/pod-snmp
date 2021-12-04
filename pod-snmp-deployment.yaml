@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pod-snmp-deployment
+  name: pod-snmp
   labels:
     app: pod-snmp
 spec:
@@ -20,10 +20,13 @@ spec:
       - name: pod-snmp 
         image: quay.io/wcaban/pod-snmp:latest
         imagePullPolicy: Always
-        # command: ["/bin/bash", "-c", "sleep infinity"]
-        # snmptrapd -Dusm -n -d -f -Lo -c /snmp/snmptrapd.conf
-        command:
-          - /snmp/entrypoint.sh
+        #command: ["/bin/bash", "-c", "sleep infinity"]
+        #command: ["/bin/bash", "-c", "iperf3 -s -p 9000"]
+        command: ["/snmp/entrypoint.sh"]
         ports:
           - containerPort: 9000
             protocol: UDP
+            name: snmp-udp        
+          - containerPort: 9000
+            protocol: TCP
+            name: snmp-tcp
