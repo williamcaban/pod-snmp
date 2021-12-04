@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Starting SNMP Trap service"
+echo "Starting SNMP Trap listener..."
 
 if [[ ! -z ${DEBUG+x} ]]; then
 
@@ -10,6 +10,7 @@ if [[ ! -z ${DEBUG+x} ]]; then
 
 else
 
-    /usr/sbin/snmptrapd -Dusm -n -f -Lo -c /snmp/snmptrapd.conf
+    echo "#### Running in regular mode"
+    /usr/sbin/snmptrapd -n -f -Lo -c /snmp/snmptrapd.conf
 
 fi
